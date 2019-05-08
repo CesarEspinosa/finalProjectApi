@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,6 +27,10 @@ public class Trx {
 	@Column(name = "category")
 	private Integer category; 
 	
+	@OneToOne
+	@JoinColumn(name = "category", insertable = false, updatable = false)
+	private Categories categories;
+	
 	@Column(name = "qty")
 	private Float qty; 
 	
@@ -33,6 +39,8 @@ public class Trx {
 	
 	@Column(name = "date")
 	private String date;
+	
+	
 
 	public Integer getId() {
 		return id;
@@ -90,6 +98,14 @@ public class Trx {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public Categories getCategories() {
+		return categories;
+	}
+
+	public void setCategories(Categories categories) {
+		this.categories = categories;
 	} 
 	
 	
