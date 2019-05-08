@@ -20,6 +20,9 @@ public class Categories {
 	
 	@Column(name = "label")
 	private String label;
+	
+	@Column(name = "color")
+	private String color; 
 
 	public Integer getId() {
 		return id;
@@ -43,7 +46,16 @@ public class Categories {
 
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	} 
+	
 	
 	
 }
