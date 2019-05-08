@@ -30,6 +30,9 @@ public class Trx {
 	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "date")
+	private String date;
 
 	public Integer getId() {
 		return id;
@@ -79,7 +82,17 @@ public class Trx {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	} 
+	
+	
 	
 	
 }
