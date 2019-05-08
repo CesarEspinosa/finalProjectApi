@@ -28,9 +28,9 @@ public class AccountsController {
 	@GetMapping(path = "/accounts")
 	public ResponseEntity<List<Accounts>>  getAccounts(@RequestParam int userId) {
 		HttpHeaders headers = new HttpHeaders();
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
 		List<Accounts> list = accountsRepository.findByIdUser(userId);
 		ResponseEntity<List<Accounts>> res = new ResponseEntity<>(list, headers, HttpStatus.OK);
 		return res;
@@ -39,9 +39,9 @@ public class AccountsController {
 	@GetMapping(path = "/accounts/trx")
 	public ResponseEntity<List<Trx>> getTrx(@RequestParam int idAccount){
 		HttpHeaders headers = new HttpHeaders();
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
 		List<Trx> list = trxRepository.findByIdAccount(idAccount);
 		ResponseEntity<List<Trx>> res = new ResponseEntity<>(list, headers, HttpStatus.OK);
 		return res;
@@ -50,9 +50,9 @@ public class AccountsController {
 	@GetMapping(path = "/accounts/account")
 	public ResponseEntity<Accounts> getAccount(@RequestParam int id){
 		HttpHeaders headers = new HttpHeaders();
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
-//		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
 		Accounts account = accountsRepository.findById(id).orElse(new Accounts());
 		return new ResponseEntity<>(account, headers, HttpStatus.OK);
 	}
