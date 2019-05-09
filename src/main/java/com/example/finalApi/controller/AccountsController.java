@@ -1,4 +1,6 @@
 package com.example.finalApi.controller;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,4 +59,36 @@ public class AccountsController {
 		return new ResponseEntity<>(account, headers, HttpStatus.OK);
 	}
 	
+	@GetMapping(path = "/accounts/addAccount")
+	public ResponseEntity<Accounts> addAcount(@RequestParam int id, 
+			@RequestParam float initialBalance, 
+			@RequestParam String name){
+		Accounts account = new Accounts(); 
+		account.setIdUser(id);
+		account.setInitialBalance(initialBalance);
+		account.setFinalBalance(initialBalance);
+		account.setNombre(name);
+		
+		account = accountsRepository.save(account);
+		
+		Trx trx = new Trx();
+		trx.setIdAccount(account.getId());
+		trx.setType(1);
+		trx.setCategory(11);
+		trx.setQty(initialBalance);
+		trx.setName("Saldo Inicial");
+		String today = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+		trx.setDate(today);
+		
+		trx = trxRepository.save(trx);
+		
+		return new ResponseEntity<>(account, getHeaders(), HttpStatus.OK);
+	}
+	
+	private HttpHeaders getHeaders(){
+		HttpHeaders headers = new HttpHeaders();
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
+		return headers;
+	}
 }
