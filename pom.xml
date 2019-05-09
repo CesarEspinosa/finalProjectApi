@@ -73,7 +73,7 @@
 				  <archive>
 					<manifest>
 						<!-- Jar file entry point -->
-						<mainClass>com.example.finalApi;</mainClass>
+						<mainClass>com.example.finalApi.FinalApiApplication</mainClass>
 					</manifest>
 				  </archive>
 				</configuration>
