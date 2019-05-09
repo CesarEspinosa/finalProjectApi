@@ -89,6 +89,7 @@ public class AccountsController {
 		HttpHeaders headers = new HttpHeaders();
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
+		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
 		return headers;
 	}
 }
