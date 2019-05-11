@@ -28,6 +28,9 @@ public class Accounts {
 	
 	@Column(name="nombre")
 	private String nombre;
+	
+	@Column(name = "issuer")
+	private String issuer;
 
 	public Integer getId() {
 		return id;
@@ -71,6 +74,13 @@ public class Accounts {
 		this.nombre = nombre;
 	}
 	
+	public String getIssuer() {
+		return issuer;
+	}
+
+	public void setIssuer(String issuer) {
+		this.issuer = issuer;
+	} 
 	
 	
 }

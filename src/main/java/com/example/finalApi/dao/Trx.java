@@ -106,7 +106,9 @@ public class Trx {
 
 	public void setCategories(Categories categories) {
 		this.categories = categories;
-	} 
+	}
+
+	
 	
 	
 	
