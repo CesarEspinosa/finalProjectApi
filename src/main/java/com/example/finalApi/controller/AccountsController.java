@@ -62,12 +62,14 @@ public class AccountsController {
 	@GetMapping(path = "/accounts/addAccount")
 	public ResponseEntity<Accounts> addAcount(@RequestParam int id, 
 			@RequestParam float initialBalance, 
-			@RequestParam String name){
+			@RequestParam String name, 
+			@RequestParam String issuer){
 		Accounts account = new Accounts(); 
 		account.setIdUser(id);
 		account.setInitialBalance(initialBalance);
 		account.setFinalBalance(initialBalance);
 		account.setNombre(name);
+		account.setIssuer(issuer);
 		
 		account = accountsRepository.save(account);
 		
