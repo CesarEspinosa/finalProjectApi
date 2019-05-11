@@ -59,6 +59,12 @@ public class AccountsController {
 		return new ResponseEntity<>(account, headers, HttpStatus.OK);
 	}
 	
+	@GetMapping (path = "/accounts/delete")
+	public ResponseEntity<String> deleteAccount(@RequestParam int id){
+		accountsRepository.deleteById(id);
+		return new ResponseEntity<>("", getHeaders(), HttpStatus.OK);
+	}
+	
 	@GetMapping(path = "/accounts/addAccount")
 	public ResponseEntity<Accounts> addAcount(@RequestParam int id, 
 			@RequestParam float initialBalance, 
