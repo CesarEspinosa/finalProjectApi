@@ -91,7 +91,8 @@ public class AccountsController {
 		trx.setType(type);
 		trx.setQty(qty);
 		trx.setName(name);
-		trx.setDate(date);
+		String today = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+		trx.setDate(today);
 		
 		trxRepository.save(trx); 
 		float oldBalance = account.getFinalBalance(); 
