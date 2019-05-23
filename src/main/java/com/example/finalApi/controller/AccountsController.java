@@ -76,6 +76,38 @@ public class AccountsController {
 		return new ResponseEntity<>(categories, getHeaders(), HttpStatus.OK);
 	}
 	
+	@GetMapping (path = "/newTrx")
+	public ResponseEntity<String> newTrx(
+			@RequestParam int idAccount, 
+			@RequestParam int type, 
+			@RequestParam int category, 
+			@RequestParam float qty, 
+			@RequestParam String name, 
+			@RequestParam String date){
+		Accounts account = accountsRepository.findById(idAccount).orElse(new Accounts());
+		Trx trx = new Trx(); 
+		trx.setIdAccount(idAccount);
+		trx.setCategory(category);
+		trx.setType(type);
+		trx.setQty(qty);
+		trx.setName(name);
+		trx.setDate(date);
+		
+		trxRepository.save(trx); 
+		float oldBalance = account.getFinalBalance(); 
+		float balance = oldBalance;
+		if(type == 1) {
+			balance += qty; 
+		}else {
+			balance -= qty;
+		}
+		account.setFinalBalance(balance);
+		
+		accountsRepository.save(account); 
+		
+		return new ResponseEntity<String>("", getHeaders(), HttpStatus.OK);
+	}
+	
 	@GetMapping(path = "/accounts/addAccount")
 	public ResponseEntity<Accounts> addAcount(@RequestParam int id, 
 			@RequestParam float initialBalance, 
@@ -103,6 +135,8 @@ public class AccountsController {
 		
 		return new ResponseEntity<>(account, getHeaders(), HttpStatus.OK);
 	}
+	
+	
 	
 	
 	
