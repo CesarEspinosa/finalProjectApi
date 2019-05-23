@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,10 +50,14 @@ public class AccountsController {
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, Content-Type, X-Auth-Token");
 		headers.add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PATCH, PUT, DELETE, OPTIONS");
-		List<Trx> list = trxRepository.findByIdAccount(idAccount);
+		List<Trx> list = trxRepository.findByIdAccount(idAccount, sortByIdAsc());
 		ResponseEntity<List<Trx>> res = new ResponseEntity<>(list, headers, HttpStatus.OK);
 		return res;
 	}
+	
+	private Sort sortByIdAsc() {
+        return new Sort(Sort.Direction.DESC, "id");
+    }
 	
 	@GetMapping(path = "/accounts/account")
 	public ResponseEntity<Accounts> getAccount(@RequestParam int id){
