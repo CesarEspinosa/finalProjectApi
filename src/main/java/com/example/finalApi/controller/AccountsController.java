@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.finalApi.dao.Accounts;
 import com.example.finalApi.dao.AccountsRepository;
+import com.example.finalApi.dao.Categories;
+import com.example.finalApi.dao.CategoriesRepository;
 import com.example.finalApi.dao.Trx;
 import com.example.finalApi.dao.TrxRepository;
 
@@ -26,6 +28,9 @@ public class AccountsController {
 	
 	@Autowired 
 	private TrxRepository trxRepository;
+	
+	@Autowired
+	private CategoriesRepository categoriesRepository;
 	
 	@GetMapping(path = "/accounts")
 	public ResponseEntity<List<Accounts>>  getAccounts(@RequestParam int userId) {
@@ -65,6 +70,12 @@ public class AccountsController {
 		return new ResponseEntity<>("", getHeaders(), HttpStatus.OK);
 	}
 	
+	@GetMapping (path = "/categories")
+	public ResponseEntity<Iterable<Categories>> getCategories(){
+		Iterable<Categories> categories = categoriesRepository.findAll();
+		return new ResponseEntity<>(categories, getHeaders(), HttpStatus.OK);
+	}
+	
 	@GetMapping(path = "/accounts/addAccount")
 	public ResponseEntity<Accounts> addAcount(@RequestParam int id, 
 			@RequestParam float initialBalance, 
@@ -92,6 +103,8 @@ public class AccountsController {
 		
 		return new ResponseEntity<>(account, getHeaders(), HttpStatus.OK);
 	}
+	
+	
 	
 	private HttpHeaders getHeaders(){
 		HttpHeaders headers = new HttpHeaders();
