@@ -140,7 +140,7 @@ public class AccountsController {
 			@RequestParam String name){
 		List<User> findUser = userRepository.findByUser(user);
 		User userSaved = new User();
-		if(findUser == null) {
+		if(findUser.isEmpty()) {
 			User newUser = new User();
 			newUser.setName(name);
 			newUser.setUser(user);
