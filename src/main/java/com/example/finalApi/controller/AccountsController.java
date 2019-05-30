@@ -128,8 +128,7 @@ public class AccountsController {
 		if(!listUsers.isEmpty()) {
 			users = listUsers;
 		}else {
-			User newUser = new User(); 
-			users.add(newUser);
+			return new ResponseEntity<>(getHeaders(), HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<List<User>>(users, getHeaders(), HttpStatus.OK);
 	}
