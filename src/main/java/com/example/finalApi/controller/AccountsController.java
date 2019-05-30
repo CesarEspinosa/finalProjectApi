@@ -1,5 +1,6 @@
 package com.example.finalApi.controller;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +21,8 @@ import com.example.finalApi.dao.Categories;
 import com.example.finalApi.dao.CategoriesRepository;
 import com.example.finalApi.dao.Trx;
 import com.example.finalApi.dao.TrxRepository;
+import com.example.finalApi.dao.User;
+import com.example.finalApi.dao.UserRepository;
 
 @Controller
 @RequestMapping(path = "/final")
@@ -32,6 +35,9 @@ public class AccountsController {
 	
 	@Autowired
 	private CategoriesRepository categoriesRepository;
+	
+	@Autowired
+	private UserRepository userRepository; 
 	
 	@GetMapping(path = "/accounts")
 	public ResponseEntity<List<Accounts>>  getAccounts(@RequestParam int userId) {
@@ -112,6 +118,36 @@ public class AccountsController {
 		accountsRepository.save(account); 
 		
 		return new ResponseEntity<String>("", getHeaders(), HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/accounts/findUser")
+	public ResponseEntity<List<User>> findUser(@RequestParam String user, 
+			@RequestParam String password){
+		List<User> users = new ArrayList<>();
+		List<User> listUsers = userRepository.findByUserAndPassword(user, password); 
+		if(listUsers == null) {
+			users = listUsers;
+		}else {
+			User newUser = new User(); 
+			users.add(newUser);
+		}
+		return new ResponseEntity<List<User>>(users, getHeaders(), HttpStatus.OK);
+	}
+	
+	@GetMapping(path = "/accounts/newUser")
+	public ResponseEntity<User> newUser(@RequestParam String user, 
+			@RequestParam String password, 
+			@RequestParam String name){
+		List<User> findUser = userRepository.findByUser(user);
+		User userSaved = new User();
+		if(findUser == null) {
+			User newUser = new User();
+			newUser.setName(name);
+			newUser.setUser(user);
+			newUser.setPassword(password);
+			userSaved = userRepository.save(newUser);
+		}
+		return new ResponseEntity<User>(userSaved, getHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping(path = "/accounts/addAccount")
