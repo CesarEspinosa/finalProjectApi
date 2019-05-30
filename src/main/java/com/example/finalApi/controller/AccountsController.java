@@ -125,7 +125,7 @@ public class AccountsController {
 			@RequestParam String password){
 		List<User> users = new ArrayList<>();
 		List<User> listUsers = userRepository.findByUserAndPassword(user, password); 
-		if(listUsers == null) {
+		if(!listUsers.isEmpty()) {
 			users = listUsers;
 		}else {
 			User newUser = new User(); 
